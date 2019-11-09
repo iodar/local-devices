@@ -1,7 +1,6 @@
 import find from "local-devices";
 import { createMarkdown } from "./exporter/markdownExporter";
 
-
 find().then((devices) => {
     const networkDevices = devices
     const markdown = createMarkdown(networkDevices)
@@ -9,7 +8,3 @@ find().then((devices) => {
         console.log(`${entry}`)
     })
 })
-
-// const networkDevicesMarkdownExport = createMarkdown(networkDevices)
-
-// console.log(networkDevicesMarkdownExport)
