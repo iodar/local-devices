@@ -1,0 +1,22 @@
+{
+  "name": "device-discovery",
+  "version": "0.0.1",
+  "description": "simple network device discovery",
+  "main": "index.ts",
+  "author": "iodar",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "ts-node": "^8.4.1"
+  },
+  "scripts": {
+    "start": "ts-node index.ts",
+    "start:js": "node build/index.js",
+    "build": "shx rm -rf build/ && tsc"
+  },
+  "devDependencies": {
+    "local-devices": "^3.0.0",
+    "shx": "^0.3.2",
+    "typescript": "^3.7.2"
+  }
+}
