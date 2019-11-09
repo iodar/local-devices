@@ -10,10 +10,12 @@
     "ts-node": "^8.4.1"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/chai": "^4.2.4",
     "@types/mocha": "^5.2.7",
     "local-devices": "^3.0.0",
     "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
     "shx": "^0.3.2",
     "typescript": "^3.7.2"
   },
@@ -21,12 +23,21 @@
     "start": "ts-node src/index.ts",
     "start:js": "node build/src/index.js",
     "build": "shx rm -rf build/ && tsc",
-    "test": "mocha --require ts-node/register --ui bdd --extension ts --watch-extension ts test/**/*.spec.ts",
-    "test:watch": "mocha --require ts-node/register --ui bdd --extension ts --watch --watch-extension ts test/**/*.spec.ts"
+    "test": "mocha --require ts-node/register --ui bdd --extension ts test/**/*.spec.ts",
+    "test:watch": "mocha --require ts-node/register --ui bdd --extension ts --watch --watch-extension ts test/**/*.spec.ts",
+    "test:coverage": "shx rm -rf .nyc_output/ && nyc mocha --require ts-node/register --ui bdd --extension ts test/**/*.spec.ts"
   },
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "files": [
     "build"
-  ]
+  ],
+  "nyc": {
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "all": true,
+    "reporter": [
+      "text",
+      "lcov"
+    ]
+  }
 }
