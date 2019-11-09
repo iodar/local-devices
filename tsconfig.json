@@ -6,9 +6,15 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "allowJs": true
+    // "allowJs": true,
+    "resolveJsonModule": true,
+    "declaration": true
   },
   "exclude": [
     "node_modules"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "test/**/*spec.ts"
   ]
 }

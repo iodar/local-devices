@@ -2,21 +2,30 @@
   "name": "device-discovery",
   "version": "0.0.1",
   "description": "simple network device discovery",
-  "main": "index.ts",
   "author": "iodar",
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "chai": "^4.2.0",
     "ts-node": "^8.4.1"
   },
-  "scripts": {
-    "start": "ts-node index.ts",
-    "start:js": "node build/index.js",
-    "build": "shx rm -rf build/ && tsc"
-  },
   "devDependencies": {
+    "@types/chai": "^4.2.4",
+    "@types/mocha": "^5.2.7",
     "local-devices": "^3.0.0",
+    "mocha": "^6.2.2",
     "shx": "^0.3.2",
     "typescript": "^3.7.2"
-  }
+  },
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "start:js": "node build/index.js",
+    "build": "shx rm -rf build/ && tsc",
+    "test": "mocha --require ts-node/register --ui bdd --extension ts --watch-extension ts test/**/*.spec.ts"
+  },
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build"
+  ]
 }
