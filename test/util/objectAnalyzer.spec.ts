@@ -2,6 +2,27 @@ import { getObjectKeys } from "../../src/util/objectAnalyzer"
 import { expect } from "chai"
 
 describe("Obeject Analyzer", () => {
+    describe("undefined object", () => {
+        const undefinedObj = undefined
+
+        it("throws error", () => {
+            expect(() => {
+                getObjectKeys(undefinedObj)
+            }).to.throw(Error, "Object must not be undefinded or null")
+        })
+    })
+
+    describe("empty object", () => {
+        const emptyObj = {}
+
+        it("should dummy", () => {
+            expect(() => {
+                getObjectKeys(emptyObj)
+            }).to.throw(Error, "Object must not be undefinded or null")
+            
+        })
+    })
+
     describe("flat object", () => {
         const flatObject: Object = {
             firstName: "Peter",
