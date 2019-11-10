@@ -1,5 +1,3 @@
-// TODO: 2019-11-10 iodar: clean up interfaces and types
-
 interface ExportProperties {
     delimeters: {
         header?: {
@@ -68,8 +66,8 @@ export interface ExporterProps {
 }
 
 export class Exporter {
-    private props: ExporterProps
-    constructor(props: ExporterProps) {
+    private props: ExportProperties
+    constructor(props: ExportProperties) {
         this.props = props
     }
 
@@ -79,7 +77,11 @@ export class Exporter {
      * properties.
      * @param array Array of objects to export
      */
-    public exportArray(arrayOfObjects: any[]): string[] {
+    public exportArray(arrayOfObjects: Array<any>): Array<string> {
         return null
+    }
+
+    private createHeader(): Array<string> {
+        return new Array<string>()
     }
 }
