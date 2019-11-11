@@ -1,8 +1,3 @@
-/**
- * | Gerätename | IP Adresse | MAC Adresse |
- * | ---- | ---- | ---- |
- */
-
 const markdownTemplateHeader = [
     `| Gerätename | IP Adresse | MAC Adresse`,
     `| ---- | ---- | ----`,
@@ -14,6 +9,11 @@ interface DeviceEntry {
     mac: string,
 }
 
+/**
+ * Converts an array of network devices into an
+ * array of lines in the markdown syntax.
+ * @param arrayOfDevices Arrays of network devices
+ */
 export function convertToMarkdownLines(arrayOfDevices: Array<DeviceEntry>): Array<string> {
     let markdownLines: Array<string> = []
 
@@ -30,6 +30,11 @@ export function convertToMarkdownLines(arrayOfDevices: Array<DeviceEntry>): Arra
     return markdownLines
 }
 
+/**
+ * Creates a markdown table with header and body. The
+ * body is generated of the given array.
+ * @param arrayOfDevices Arrays of network devices
+ */
 export function createMarkdown(arrayOfDevices: Array<DeviceEntry>): Array<string> {
     try {
         let markdown: Array<string> = markdownTemplateHeader
