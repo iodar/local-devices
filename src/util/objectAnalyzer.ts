@@ -3,7 +3,7 @@
  * of all keys that are containend in the object.
  * @param object Object to be analyzied.
  */
-export function getObjectKeys(object: Object): Array<string>{
+export function getObjectKeys(object: object): string[] {
     if (object === undefined || object === null) {
         throw new Error("Object must not be undefinded or null")
     } else {

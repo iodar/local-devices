@@ -19,12 +19,11 @@ describe("Obeject Analyzer", () => {
             expect(() => {
                 getObjectKeys(emptyObj)
             }).to.throw(Error, "Object must not be undefinded or null")
-            
         })
     })
 
     describe("flat object", () => {
-        const flatObject: Object = {
+        const flatObject: object = {
             firstName: "Peter",
             lastName: "Miller",
             age: 18,
@@ -43,7 +42,7 @@ describe("Obeject Analyzer", () => {
 
     // TODO: 2019-11-10 iodar: not implemented yet
     describe.skip("object with complex structure", () => {
-        const complexObject: Object = {
+        const complexObject: object = {
             person: {
                 lastName: "Miller",
                 firstName: "Peter",

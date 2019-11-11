@@ -1,3 +1,5 @@
+import { getObjectKeys } from "../util/objectAnalyzer"
+
 interface ExportProperties {
     delimeters: {
         header?: {
@@ -77,11 +79,17 @@ export class Exporter {
      * properties.
      * @param array Array of objects to export
      */
-    public exportArray(arrayOfObjects: Array<any>): Array<string> {
+    public exportArray(arrayOfObjects: any[]): string[] {
+        const firstEntryOfArray: object = arrayOfObjects[0]
         return null
     }
 
-    private createHeader(): Array<string> {
-        return new Array<string>()
+    private createHeader(object: object): string {
+        const objectKeys: string[] = getObjectKeys(object)
+        const delimeter: string = this.props.delimeters.header.entryDelimeter
+        const endOfRow = this.props.delimeters.header.endOfRow
+        let header: string = this.props.delimeters.header.startOfRow
+        header += objectKeys.join(delimeter) + endOfRow
+        return header
     }
 }

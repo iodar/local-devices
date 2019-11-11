@@ -17,12 +17,14 @@
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "shx": "^0.3.2",
+    "tslint": "^5.20.1",
     "typescript": "^3.7.2"
   },
   "scripts": {
     "start": "ts-node src/index.ts",
     "start:js": "node build/src/index.js",
     "build": "shx rm -rf build/ && tsc",
+    "lint": "tslint -p tsconfig.json",
     "test": "mocha --require ts-node/register --ui bdd --extension ts test/**/*.spec.ts",
     "test:watch": "mocha --require ts-node/register --ui bdd --extension ts --watch --watch-extension ts test/**/*.spec.ts",
     "test:coverage": "shx rm -rf .nyc_output/ && nyc mocha --require ts-node/register --ui bdd --extension ts test/**/*.spec.ts"

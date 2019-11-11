@@ -1,12 +1,9 @@
-const markdownTemplateHeader = [
-    `| Gerätename | IP Adresse | MAC Adresse`,
-    `| ---- | ---- | ----`,
-]
+const markdownTemplateHeader = [`| Gerätename | IP Adresse | MAC Adresse`, `| ---- | ---- | ----`]
 
 interface DeviceEntry {
-    name: string,
-    ip: string,
-    mac: string,
+    name: string
+    ip: string
+    mac: string
 }
 
 /**
@@ -14,14 +11,14 @@ interface DeviceEntry {
  * array of lines in the markdown syntax.
  * @param arrayOfDevices Arrays of network devices
  */
-export function convertToMarkdownLines(arrayOfDevices: Array<DeviceEntry>): Array<string> {
-    let markdownLines: Array<string> = []
+export function convertToMarkdownLines(arrayOfDevices: DeviceEntry[]): string[] {
+    const markdownLines: string[] = []
 
     if (arrayOfDevices === undefined || arrayOfDevices.length < 1) {
         throw new Error("No Devices in Array ... Exiting ...")
     } else {
         // convert array entries to markdown
-        arrayOfDevices.forEach(entry => {
+        arrayOfDevices.forEach((entry) => {
             // convert line to markdown
             const markdownLine = `| ${entry.name} | ${entry.ip} | ${entry.mac}`
             markdownLines.push(markdownLine)
@@ -35,15 +32,14 @@ export function convertToMarkdownLines(arrayOfDevices: Array<DeviceEntry>): Arra
  * body is generated of the given array.
  * @param arrayOfDevices Arrays of network devices
  */
-export function createMarkdown(arrayOfDevices: Array<DeviceEntry>): Array<string> {
+export function createMarkdown(arrayOfDevices: DeviceEntry[]): string[] {
     try {
-        let markdown: Array<string> = markdownTemplateHeader
+        let markdown: string[] = markdownTemplateHeader
         const markdownTableBody = convertToMarkdownLines(arrayOfDevices)
         markdown = markdown.concat(markdownTableBody)
         return markdown
     } catch (error) {
-        console.error(error);
+        console.error(error)
         return null
     }
 }
-

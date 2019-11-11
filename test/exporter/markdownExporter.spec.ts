@@ -1,13 +1,13 @@
-import { expect } from "chai";
-import { convertToMarkdownLines, createMarkdown } from "../../src/exporter/markdownExporter";
+import { expect } from "chai"
+import { convertToMarkdownLines, createMarkdown } from "../../src/exporter/markdownExporter"
 
 describe("Markdown Exporter", () => {
     describe("Convert device array to markdown", () => {
         describe("not empty array", () => {
-            let convertedLines: Array<string>
+            let convertedLines: string[]
             const arrayOfDevices = [
-                { name: '?', ip: '10.12.1.0', mac: 'zz:uu:65:v4:yy:yy' },
-                { name: '?', ip: '10.12.1.2', mac: 'xx:uu:65:v4:yy:yy' },
+                { name: "?", ip: "10.12.1.0", mac: "zz:uu:65:v4:yy:yy" },
+                { name: "?", ip: "10.12.1.2", mac: "xx:uu:65:v4:yy:yy" },
             ]
             before(() => {
                 convertedLines = convertToMarkdownLines(arrayOfDevices)
@@ -36,8 +36,8 @@ describe("Markdown Exporter", () => {
         describe("not empty array", () => {
             let markdownTable
             const arrayOfDevices = [
-                { name: '?', ip: '10.12.1.0', mac: 'zz:uu:65:v4:yy:yy' },
-                { name: '?', ip: '10.12.1.2', mac: 'xx:uu:65:v4:yy:yy' },
+                { name: "?", ip: "10.12.1.0", mac: "zz:uu:65:v4:yy:yy" },
+                { name: "?", ip: "10.12.1.2", mac: "xx:uu:65:v4:yy:yy" },
             ]
 
             markdownTable = createMarkdown(arrayOfDevices)
