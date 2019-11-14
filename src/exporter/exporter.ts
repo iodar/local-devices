@@ -88,6 +88,7 @@ export class Exporter {
         const objectKeys: string[] = getObjectKeys(object)
         const delimeter: string = this.props.delimeters.header.entryDelimeter
         const endOfRow = this.props.delimeters.header.endOfRow
+
         let header: string = this.props.delimeters.header.startOfRow
         header += objectKeys.join(delimeter) + endOfRow
         return header
