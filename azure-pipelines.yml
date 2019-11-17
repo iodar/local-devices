@@ -22,9 +22,10 @@ steps:
     npm install yarn
     yarn
     yarn ci
+  displayName: 'Install Dependencies And Run Tests In Ci Mode'
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: 'test-results.xml'
     testRunTitle: 'Tests'
-  displayName: 'Collect test results'
+  displayName: 'Collect Test Results'
