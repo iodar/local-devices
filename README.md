@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/granzowdario/local-devices/_apis/build/status/iodar.local-devices?branchName=master)](https://dev.azure.com/granzowdario/local-devices/_build/latest?definitionId=3&branchName=master)
+
 # Device Discovery
 
 Simple tool that performs an netwrok scan of the local network and exports the results
