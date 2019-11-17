@@ -1,6 +1,12 @@
 import { getObjectKeys } from "../util/objectAnalyzer"
 
-interface ExportProperties {
+interface HeaderProperties {
+    startOfRow: string
+    entryDelimeter: string
+    endOfRow: string
+}
+
+export interface ExportProperties {
     delimeters: {
         header?: {
             startOfRow: string
@@ -68,8 +74,7 @@ export interface ExporterProps {
 }
 
 export class Exporter {
-    private props: ExportProperties
-    constructor(props: ExportProperties) {
+    constructor(private props: ExportProperties) {
         this.props = props
     }
 
@@ -84,13 +89,34 @@ export class Exporter {
         return null
     }
 
-    private createHeader(object: object): string {
+    /**
+     * Creates a the header structure for the desired output format.
+     * Uses the given parameter to extract the table header information
+     * from the object.
+     * @param object object to export with simple structure
+     */
+    public createHeader(object: object): string {
         const objectKeys: string[] = getObjectKeys(object)
-        const delimeter: string = this.props.delimeters.header.entryDelimeter
-        const endOfRow = this.props.delimeters.header.endOfRow
 
-        let header: string = this.props.delimeters.header.startOfRow
-        header += objectKeys.join(delimeter) + endOfRow
+        // determin whether the header has a different structure than the rest of
+        // the output
+        if (!!this.props.delimeters.header) {
+            return this.createHeaderStructure(this.props.delimeters.header, objectKeys)
+        } else {
+            return this.createHeaderStructure(this.props.delimeters.body, objectKeys)
+        }
+    }
+
+    /**
+     * Creates the first line e.g. the header with the given parameters.
+     * @param headerProps properties that define the structure of the header
+     * @param objectKeys contents that should be written into the header columns
+     */
+    private createHeaderStructure(headerProps: HeaderProperties, objectKeys: string[]): string {
+        const header: string = //
+            headerProps.startOfRow + //
+            objectKeys.join(headerProps.entryDelimeter) + //
+            headerProps.endOfRow
         return header
     }
 }
