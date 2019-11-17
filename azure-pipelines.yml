@@ -18,5 +18,10 @@ steps:
 - script: |
     npm install yarn
     yarn
-    yarn test
-  displayName: 'npm install and run tests'
+    yarn ci
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'test-results.xml'
+    testRunTitle: 'Tests'
+  displayName: 'Collect test results'
