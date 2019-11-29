@@ -1,0 +1,6 @@
+{
+    "mochaExplorer.files": "test/**/*spec.ts",
+    "mochaExplorer.mochaPath": "node_modules/mocha",
+    "mochaExplorer.require": "ts-node/register",
+    "mochaExplorer.ui": "bdd"
+}
