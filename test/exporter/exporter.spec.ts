@@ -64,6 +64,43 @@ describe("Exporter", () => {
         })
     })
 
+    describe("export body to csv", () => {
+        describe("simple body with one entry", () => {
+            const csvExporter = new Exporter(exportTypes.csv)
+            const objectToExport = [
+                {
+                    lastName: "Mueller",
+                    firstName: "Peter",
+                    age: 22,
+                },
+            ]
+            const csvBody: string[] = csvExporter.createBody(objectToExport)
+            it("should render correct body", () => {
+                expect(csvBody).to.be.deep.eq(["Mueller,Peter,22"])
+            })
+        })
+
+        describe("simple body with multiple entries", () => {
+            const csvExporter = new Exporter(exportTypes.csv)
+            const objectToExport = [
+                {
+                    lastName: "Mueller",
+                    firstName: "Peter",
+                    age: 22,
+                },
+                {
+                    lastName: "Washington",
+                    firstName: "James",
+                    age: 47,
+                },
+            ]
+            const csvBody: string[] = csvExporter.createBody(objectToExport)
+            it("should render corrent body", () => {
+                expect(csvBody).to.be.deep.eq(["Mueller,Peter,22", "Washington,James,47"])
+            })
+        })
+    })
+
     describe("export to confluence markdown", () => {
         const markdownExporter = new Exporter(exportTypes.confluenceMarkdown)
         const objectToExport = {
