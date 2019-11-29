@@ -46,7 +46,7 @@ export const exportTypes: ExportTypes = {
         delimeters: {
             body: {
                 startOfRow: "|",
-                endOfRow: "|",
+                endOfRow: "",
                 entryDelimeter: "|",
                 extraLineBeforeBody: "----",
             },
@@ -89,6 +89,34 @@ export class Exporter {
         return null
     }
 
+    public createBody(body: any[]): string[] {
+        const bodyKeys = Object.keys(body[0])
+        const startLine = this.props.delimeters.body.startOfRow
+        const entryDelimeter = this.props.delimeters.body.entryDelimeter
+        const endLine = this.props.delimeters.body.endOfRow
+        const lines: string[] = []
+
+        if (!!this.props.delimeters.body.extraLineBeforeBody) {
+            const entriesBeforeBodyArray: string[] = []
+            bodyKeys.forEach(() => {
+                entriesBeforeBodyArray.push(this.props.delimeters.body.extraLineBeforeBody)
+            })
+            lines.push(startLine + entriesBeforeBodyArray.join(entryDelimeter) + endLine)
+        }
+
+        body.forEach((line) => {
+            const lineKeys = Object.keys(line)
+            const lineEntriesArray: any[] = []
+            lineKeys.forEach((lineKey) => {
+                lineEntriesArray.push(line[lineKey])
+            })
+            const lineString: string = startLine + lineEntriesArray.join(entryDelimeter) + endLine
+            lines.push(lineString)
+        })
+
+        return lines
+    }
+
     /**
      * Creates a the header structure for the desired output format.
      * Uses the given parameter to extract the table header information
@@ -97,7 +125,6 @@ export class Exporter {
      */
     public createHeader(object: object): string {
         const objectKeys: string[] = getObjectKeys(object)
-
         // determin whether the header has a different structure than the rest of
         // the output
         if (!!this.props.delimeters.header) {
@@ -113,9 +140,9 @@ export class Exporter {
      * @param objectKeys contents that should be written into the header columns
      */
     private createHeaderStructure(headerProps: HeaderProperties, objectKeys: string[]): string {
-        const header: string =
-            headerProps.startOfRow +
-            objectKeys.join(headerProps.entryDelimeter) +
+        const header: string = //
+            headerProps.startOfRow + //
+            objectKeys.join(headerProps.entryDelimeter) + //
             headerProps.endOfRow
         return header
     }
