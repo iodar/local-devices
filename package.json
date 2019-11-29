@@ -40,7 +40,8 @@
     "extends": "@istanbuljs/nyc-config-typescript",
     "reporter": [
       "text",
-      "lcov"
+      "lcov",
+      "html"
     ],
     "include": [
       "src/**/*.ts"
