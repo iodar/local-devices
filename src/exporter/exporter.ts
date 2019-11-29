@@ -113,9 +113,9 @@ export class Exporter {
      * @param objectKeys contents that should be written into the header columns
      */
     private createHeaderStructure(headerProps: HeaderProperties, objectKeys: string[]): string {
-        const header: string = //
-            headerProps.startOfRow + //
-            objectKeys.join(headerProps.entryDelimeter) + //
+        const header: string =
+            headerProps.startOfRow +
+            objectKeys.join(headerProps.entryDelimeter) +
             headerProps.endOfRow
         return header
     }
