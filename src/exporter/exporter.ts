@@ -79,16 +79,25 @@ export class Exporter {
     }
 
     /**
-     * Exports an array of objects. Then type of
+     * Exports an array of objects. The type of
      * export is controlled by the Exporter
      * properties.
      * @param array Array of objects to export
      */
     public exportArray(arrayOfObjects: any[]): string[] {
         const firstEntryOfArray: object = arrayOfObjects[0]
-        return null
+        const headerArray: string[] = [this.createHeader(firstEntryOfArray)]
+        const bodyArray: string[] = this.createBody(arrayOfObjects)
+        const headerAndBodyArray: string[] = headerArray.concat(bodyArray)
+        return headerAndBodyArray
     }
 
+    /**
+     * Creates the body to export from the given array. Type of
+     * export an the structure are controlled by the exporters
+     * properties.
+     * @param body array of any type
+     */
     public createBody(body: any[]): string[] {
         const bodyKeys = Object.keys(body[0])
         const startLine = this.props.delimeters.body.startOfRow
