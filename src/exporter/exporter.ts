@@ -99,27 +99,21 @@ export class Exporter {
      * @param body array of any type
      */
     public createBody(body: any[]): string[] {
-        const bodyKeys = Object.keys(body[0])
-        const startLine = this.props.delimeters.body.startOfRow
-        const entryDelimeter = this.props.delimeters.body.entryDelimeter
-        const endLine = this.props.delimeters.body.endOfRow
+        const bodyObjectKeys = Object.keys(body[0])
+        const { startOfRow, entryDelimeter, endOfRow, extraLineBeforeBody } = this.props.delimeters.body
         const lines: string[] = []
 
-        if (!!this.props.delimeters.body.extraLineBeforeBody) {
-            const entriesBeforeBodyArray: string[] = []
-            bodyKeys.forEach(() => {
-                entriesBeforeBodyArray.push(this.props.delimeters.body.extraLineBeforeBody)
-            })
-            lines.push(startLine + entriesBeforeBodyArray.join(entryDelimeter) + endLine)
+        if (!!extraLineBeforeBody) {
+            const bodyHeaderSeperator = this.transformStringIntoArray(extraLineBeforeBody, bodyObjectKeys.length)
+            lines.push(startOfRow + bodyHeaderSeperator.join(entryDelimeter) + endOfRow)
         }
 
-        body.forEach((line) => {
-            const lineKeys = Object.keys(line)
+        body.forEach(line => {
             const lineEntriesArray: any[] = []
-            lineKeys.forEach((lineKey) => {
+            bodyObjectKeys.forEach(lineKey => {
                 lineEntriesArray.push(line[lineKey])
             })
-            const lineString: string = startLine + lineEntriesArray.join(entryDelimeter) + endLine
+            const lineString: string = startOfRow + lineEntriesArray.join(entryDelimeter) + endOfRow
             lines.push(lineString)
         })
 
@@ -134,12 +128,13 @@ export class Exporter {
      */
     public createHeader(object: object): string {
         const objectKeys: string[] = getObjectKeys(object)
+        const { header, body } = this.props.delimeters
         // determin whether the header has a different structure than the rest of
         // the output
-        if (!!this.props.delimeters.header) {
-            return this.createHeaderStructure(this.props.delimeters.header, objectKeys)
+        if (!!header) {
+            return this.createHeaderStructure(header, objectKeys)
         } else {
-            return this.createHeaderStructure(this.props.delimeters.body, objectKeys)
+            return this.createHeaderStructure(body, objectKeys)
         }
     }
 
@@ -154,5 +149,13 @@ export class Exporter {
             objectKeys.join(headerProps.entryDelimeter) + //
             headerProps.endOfRow
         return header
+    }
+
+    private transformStringIntoArray(singelString: string, targetArrayLenght: number): string[] {
+        const arrayOfSingleString: string[] = []
+        for (let index = 0; index < targetArrayLenght; index++) {
+            arrayOfSingleString.push(singelString)
+        }
+        return arrayOfSingleString
     }
 }
