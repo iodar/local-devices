@@ -26,7 +26,7 @@
     "start:js": "node build/src/index.js",
     "build": "shx rm -rf build/ && tsc",
     "lint": "tslint -p tsconfig.json",
-    "test": "mocha --require ts-node/register --ui bdd --extension ts test/**/*.spec.ts",
+    "test": "mocha --require ts-node/register --ui bdd --reporter dot --extension ts test/**/*.spec.ts",
     "test:watch": "mocha --require ts-node/register --ui bdd --reporter min --extension ts --watch --watch-extension ts test/**/*.spec.ts",
     "coverage": "shx rm -rf .nyc_output/ && nyc mocha --require ts-node/register --ui bdd --extension ts test/**/*.spec.ts",
     "ci": "mocha --require ts-node/register --ui bdd --extension ts --reporter mocha-junit-reporter test/**/*.spec.ts"
